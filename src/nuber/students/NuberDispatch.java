@@ -1,6 +1,7 @@
 package nuber.students;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.concurrent.Future;
 
 /**
@@ -17,6 +18,11 @@ public class NuberDispatch {
 	private final int MAX_DRIVERS = 999;
 	
 	private boolean logEvents = false;
+
+	private HashMap<String, Integer> regions;
+
+	private LinkedList<Driver> driverQueue = new LinkedList<>();
+	
 	
 	/**
 	 * Creates a new dispatch objects and instantiates the required regions and any other objects required.
@@ -27,6 +33,8 @@ public class NuberDispatch {
 	 */
 	public NuberDispatch(HashMap<String, Integer> regionInfo, boolean logEvents)
 	{
+		this.regions = regionInfo;
+		this.logEvents = logEvents;
 	}
 	
 	/**
@@ -39,6 +47,7 @@ public class NuberDispatch {
 	 */
 	public boolean addDriver(Driver newDriver)
 	{
+		return driverQueue.offer(newDriver);
 	}
 	
 	/**
@@ -50,6 +59,7 @@ public class NuberDispatch {
 	 */
 	public Driver getDriver()
 	{
+		return driverQueue.poll();
 	}
 
 	/**
@@ -80,6 +90,7 @@ public class NuberDispatch {
 	 * @return returns a Future<BookingResult> object
 	 */
 	public Future<BookingResult> bookPassenger(Passenger passenger, String region) {
+		
 	}
 
 	/**
